@@ -1,22 +1,27 @@
 class Solution {
 public:
-    int stoneGameII(vector<int>& piles) {
-        int noOfPiles = piles.size();
-        vector<vector<int> > dp(noOfPiles + 1, vector<int>(noOfPiles + 1, -1000001));
-        vector<int> suffSum(noOfPiles + 1);
-        int sum = 0;
-        for(int i = noOfPiles - 1; i >= 0; i--){
-            sum += piles[i];
-            suffSum[i] = sum;
-        }
-        for(int i = 0; i <= noOfPiles; i++) dp[noOfPiles][i] = 0;
-        for(int i = noOfPiles - 1; i >= 0; i--){
-            for(int M = 1; M <= noOfPiles; M++){
-                for(int x = 1; x <= 2 * M && i + x <= noOfPiles; x++){
-                    dp[i][M] = max(dp[i][M], (suffSum[i] - suffSum[i + x]) - dp[i + x][max(x, M)]);
-                }
-            }
-        }
-        return (sum + dp[0][1]) / 2;
+    int dp[101][201];
+    int help(int i , int M , vector<int>&p)
+    {
+        if( i >= p.size())
+            return 0 ;
+        if(dp[i][M] != -1)
+            return dp[i][M];
+        int total = 0;
+        int ans = INT_MIN;      
+            for(int j= 0 ; j <2*M;j++) {//j+1 is the total no . of stones we are picking
+                if( i+j < p.size())
+                    total += p[i+j];
+                ans= max(ans , total - help(i+j+1 , max(M,j+1),p))   ;
+    }
+        return dp[i][M]= ans;
+    }
+    int stoneGameII(vector<int>& p) {
+        int sum = 0 ; 
+        memset(dp , -1 , sizeof dp);
+        for(auto a:p)
+            sum += a;
+        int diff = help(0, 1 , p);
+        return (sum + diff)/2;
     }
 };
