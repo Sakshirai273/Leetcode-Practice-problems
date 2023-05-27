@@ -18,10 +18,18 @@ public:
     }
     int stoneGameII(vector<int>& p) {
         int sum = 0 ; 
-        memset(dp , -1 , sizeof dp);
+        memset(dp , -1 , sizeof dp); 
         for(auto a:p)
             sum += a;
         int diff = help(0, 1 , p);
         return (sum + diff)/2;
     }
 };
+/*The memset() function in C++ copies a single character for a specified number of time to an object.
+The memset() function takes three arguments: dest, ch and count. The character represented by ch is first converted to unsigned char and then copies it into the first count characters of the object pointed to by dest.
+
+The behaviour of the function is undefined if:
+The object is not trivially copyable.
+count is greater than the size of dest.
+It is defined in <cstring> header file.
+*/
