@@ -15,8 +15,8 @@ public:
     }
     int minCost(int n, vector<int>& cuts) {
         memset(dp , -1 , sizeof(dp));
-        cuts.push_back(0);
-        cuts.push_back(n);
+        cuts.push_back(0); //left end of the stick
+        cuts.push_back(n); // right end of the stick
         sort(cuts.begin() , cuts.end());
         
         return solve(0 , cuts.size()-1, cuts);
