@@ -1,39 +1,23 @@
 class Solution {
 public:
-    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-        
-        vector<vector<int>> g(n,vector<int>(0));
-        for(int i=0;i<n;i++){
-            if(i==headID)continue;
-            // g[i].push_back(manager[i]);
-            g[manager[i]].push_back(i);
+    int maxTime= 0;
+    
+    void DFS(unordered_map<int , vector<int>> &adj , vector<int> & informTime , int curr_employee , int curr_time ){
+        maxTime= max(maxTime, curr_time);
+        for(int &employee : adj[curr_employee]){
+            DFS(adj, informTime, employee , curr_time + informTime[curr_employee]);
         }
-        
-        // for(int i=0;i<n;i++){
-        //     cout<<i<<"-->";
-        //     for(int j:g[i])cout<<j<<" ";
-        //     cout<<endl;
-        // }
-        
-        int ans=0;
-        queue<pair<int,int>> q;
-        q.push({headID,0});
-        vector<int> vis(n,0);
-        vis[headID]=1;
-        while(!q.empty()){
-            int node=q.front().first;
-            int time=q.front().second;
-            q.pop();
-            
-            ans=max(ans,time);
-            
-            for(int i=0;i<g[node].size();i++){
-                if(vis[g[node][i]]==0){
-                    q.push({g[node][i],time+informTime[node]});
-                    vis[g[node][i]]=1;
-                }
-            }
-        }
-        return ans;
     }
-};
+    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
+        unordered_map<int , vector<int>>adj;
+        for(int i = 0 ; i< manager.size(); i++){
+            int employee_i = i ;
+            int manager_i = manager[i];
+            
+            if(manager_i != -1)
+                adj[manager_i].push_back(employee_i);
+        }
+              DFS(adj , informTime , headID ,0 );
+            return maxTime;
+        }
+    };
