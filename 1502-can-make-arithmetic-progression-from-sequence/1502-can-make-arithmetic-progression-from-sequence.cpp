@@ -2,7 +2,7 @@ class Solution {
 public:
     bool canMakeArithmeticProgression(vector<int>& arr) {
         int n = arr.size();
-    set<int>st;
+        set<int>st;
         int mini = arr[0];
         int maxi = arr[0];
         
