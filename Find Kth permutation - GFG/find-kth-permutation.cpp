@@ -11,9 +11,8 @@ using namespace std;
 class Solution
 {
 public:
-    string kthPermutation(int n, int k)
-    {
-     int factorial[11] ;
+    string kthPermutation(int n, int k){
+    int factorial[11] ;
         factorial[0] = 1 ;
         string Ar = "", ans = "" ;
         
@@ -41,7 +40,7 @@ public:
         
         return ans ;
     }
-    };
+};
 
 //{ Driver Code Starts.
 
