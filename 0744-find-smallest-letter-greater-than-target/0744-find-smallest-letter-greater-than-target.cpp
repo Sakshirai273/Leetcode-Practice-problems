@@ -14,13 +14,9 @@ public:
                 r = mid-1;    
             }
             else
-            {
                 l  = mid + 1;
-            }
         }
-            if(pos == -1)
-                return letters[0];  
-        
+            if(pos == -1)return letters[0];  
         return letters[pos]; 
     } 
 };
