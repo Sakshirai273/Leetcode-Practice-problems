@@ -1,30 +1,28 @@
 class SnapshotArray {
-    private:
-    map<int, map<int, int>> snaps;
-    int snapId = 0;
+private:
+    int snapid=0;
+    vector<map<int,int>> arr;
 public:
     SnapshotArray(int length) {
-        for(int i = 0 ; i< length ; i++){
-            map<int, int> mp ;
-            mp[0] = 0;
-            snaps[i] = mp;
-            
+        arr.resize(length);
+        for(int i=0;i<length;i++){
+            arr[i][0]=0;
         }
     }
     
     void set(int index, int val) {
-        snaps[index][snapId] = val;
-        
+        arr[index][snapid]=val;
     }
     
     int snap() {
-        return snapId++; 
+        snapid++;
+        return snapid-1;
     }
     
     int get(int index, int snap_id) {
-        auto it = snaps[index].upper_bound(snap_id);
+        auto it=arr[index].upper_bound(snap_id);
         it--;
-            return it -> second;
+        return (*it).second;
     }
 };
 
