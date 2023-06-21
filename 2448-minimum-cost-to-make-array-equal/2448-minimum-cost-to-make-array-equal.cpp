@@ -1,26 +1,23 @@
 class Solution {
 public:
-    long long minCost(vector<int>& nums, vector<int>& cost) {
-        int n = nums.size();
-        long long ans = 1e18;
-        vector<pair<int,int>> v(n);
-        for(int i = 0; i < nums.size(); i++)
-            v[i] = {nums[i], cost[i]};
-        
-        sort(v.begin(), v.end());
-        vector<long long> pref(n), suff(n);
-        long long c_sum = 0, nc = 0;
-        for(int i = 0; i < n; i++){
-            pref[i] = (v[i].first * c_sum - nc);
-            c_sum += (long long)v[i].second;
-            nc += (long long)v[i].first * (long long)v[i].second;
+  long long minCost(vector<int>& A, vector<int>& cost) {
+        long long l = 1, r = 1000000, res = f(A, cost, 1), x;
+        while (l < r) {
+            x = (l + r) / 2;
+            long long y1 = f(A, cost, x), y2 = f(A, cost, x + 1);
+            res = min(y1, y2);
+            if (y1 < y2)
+                r = x;
+            else
+                l = x + 1;
         }
-        c_sum = 0, nc = 0;
-        for(int i = n - 1; i >= 0; i--){
-            ans = min(ans, abs(v[i].first * c_sum - nc) + pref[i]);
-            c_sum += (long long)v[i].second;
-            nc += (long long)v[i].first * (long long)v[i].second;
-        }
-        return ans;
+        return res;
+    }
+
+    long long f(vector<int>& A, vector<int>& cost, int x) {
+        long long res = 0;
+        for (int i = 0; i < A.size(); ++i)
+            res += 1L * abs(A[i] - x) * cost[i];
+        return res;
     }
 };
