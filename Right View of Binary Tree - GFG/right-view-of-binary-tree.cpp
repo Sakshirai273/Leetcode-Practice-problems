@@ -41,7 +41,8 @@ class Solution
 {
     public:
     //Function to return list containing elements of right view of binary tree.
-    vector<int> rightView(Node *root){
+    vector<int> rightView(Node *root)
+    {
        // Your Code here
        vector<int> ans;
        queue<Node*> q;
