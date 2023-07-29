@@ -195,6 +195,4 @@ float findMedian(struct Node *root)
     }
     float ans=findm(root,0,m1,m2);
     return ans;
-      //Code here
 }
-
