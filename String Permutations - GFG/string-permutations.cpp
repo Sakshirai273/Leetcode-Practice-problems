@@ -5,9 +5,8 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    //Complete this function
-        vector<string>ans;
-        
+   
+    vector<string>ans;
     void helper(string &s,string temp,int vis[],int n){
         if(temp.length()==n){
             ans.push_back(temp);
