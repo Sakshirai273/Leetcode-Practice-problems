@@ -1,28 +1,26 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        string answer = "";
-        int start = 0;
-        int end = 0;
-        int n = s.length();
-
-        while(end < n){
-            if(s[end] != ' '){
-                end++;
+        stack<char>st;
+        int n = s.size();
+        string ans = "";
+        for(int i = 0 ; i < n; i++){
+            st.push(s[i]);
+            if(i == n - 1){
+                st.push(' ');
+                while(!st.empty()){
+                    ans += st.top();
+                    st.pop();
+                }
+                return ans.substr(1,ans.size()-1);
             }
-            else{
-                string temp = s.substr(start, end - start);
-                reverse(temp.begin(),temp.end());
-                answer = answer + temp + " ";
-                
-                end++;
-                start = end;
+            else if(s[i] == ' '){
+                while(!st.empty()){
+                    ans += st.top();
+                    st.pop();
+                }
             }
         }
-        string temp = s.substr(start, end - start); // for last word of string
-        reverse(temp.begin(),temp.end());
-        
-        answer += temp;
-        return answer;
+        return "";
     }
 };
