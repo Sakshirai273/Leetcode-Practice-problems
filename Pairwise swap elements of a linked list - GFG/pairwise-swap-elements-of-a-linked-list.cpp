@@ -37,7 +37,7 @@ class Solution
     public:
     Node* pairWiseSwap(struct Node* head) 
     {
-         
+          
        if( head->next == NULL ) return head;
        Node* prev = head ,* curr = head->next ,*next = curr->next;
        Node* head2 = curr;
