@@ -30,7 +30,7 @@ class Solution{
     public:
     // Your are required to complete this function
     // function should return root of the modified BST
-      vector<int> arr;
+     vector<int> arr;
     Node* BST(int l,int r){
         if(l>r)  return NULL;
         
@@ -50,6 +50,8 @@ class Solution{
         inorder(root);
         return BST(0,arr.size()-1);
     }
+
+
 };
 
 
