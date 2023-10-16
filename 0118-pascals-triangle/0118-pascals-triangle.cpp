@@ -12,3 +12,5 @@ public:
 	return res;
     }
 };
+
+//NOTE:- To calculate the xCy(combination) of a number , pascal traingle is the most efficient solution!
