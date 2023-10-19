@@ -10,7 +10,7 @@ class Solution
 	//Function to find the level of node X.
 	int nodeLevel(int V, vector<int> adj[], int X) 
 	{
-	            vector<int>visit(V,0);
+	           vector<int>visit(V,0);
         int c;
         queue<pair<int,int>>q;
         q.push({0,0});
@@ -34,9 +34,7 @@ class Solution
                  }
                  
             }
-            
-            
-        }
+                    }
         return -1;
     }
 };
