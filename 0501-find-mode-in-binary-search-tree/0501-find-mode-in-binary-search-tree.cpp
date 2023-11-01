@@ -11,28 +11,45 @@
  */
 class Solution {
 public:
-    unordered_map<int, int> mp;
-    void inorder(TreeNode* root){
-        if(!root)
-            return;
-        inorder(root->left);
-        mp[root->val]++;
-        inorder(root->right);
-    }
-    
+    int cnt=0;
+    int maxi=0;
+    int curr=0;
+    vector<int> ans;
     vector<int> findMode(TreeNode* root) {
-        inorder(root);
-        vector<int>ans;
-        int maxi = INT_MIN;
         
-        for(auto i : mp){
-            maxi = max(maxi, i.second);
-        }
-        for(auto j : mp){
-            if(j.second == maxi){
-                ans.push_back(j.first);
-            }
-        }
+        f(root);
+        cnt=0;
+        curr=0;
+        // cout<<maxi;
+        f2(root);
         return ans;
     }
+    
+    void f(TreeNode* root){
+        if(root==NULL)return;
+        f(root->left);
+        // if(maxi==0)curr=root->val;
+        if(root->val==curr)cnt++;
+        else {
+            cnt=1;
+            curr=root->val;
+        }
+        // cout<<cnt;
+        maxi=max(maxi,cnt);
+        f(root->right);
+    }
+    
+    void f2(TreeNode* root){
+        if(root==NULL)return;
+        f2(root->left);
+        if(root->val==curr)cnt++;
+        else {
+            cnt=1;
+            curr=root->val;
+        }
+        // cout<<cnt;
+        if(cnt==maxi)ans.push_back(curr);
+        f2(root->right);
+    }
+    
 };
